@@ -34,12 +34,13 @@ app.get("/", (req, res) => {
 const routers = fs.readdirSync("./routers");
 routers.forEach((router) => {
   try {
+    console.log(`🔨  Creating router /${router} ...`);
     const routerPath = `./routers/${router}`;
     const routerName = router.replace(".js", "");
     app.use(`/${routerName}`, require(routerPath).router);
     console.log(`✔️  Router /${routerName} is created`);
   } catch (error) {
-    console.log(`❌  Router /${router} is not created with error: ${error}`);
+    console.error(`❌  Router /${router} is not created with error: ${error}`);
   }
 });
 
