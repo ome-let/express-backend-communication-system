@@ -7,7 +7,7 @@ const uploadFile = async (ref ,file) => {
         if(process.env.environment == "local") {
             filePath = __dirname + "\\\\..\\\\" + file.path;
         } else {
-            filePath = __dirname + "/" + file.path;
+            filePath = file.path;
         }
         const fileRef = await fs.readFileSync(filePath);
         const storageRef = storage.ref(ref + "/" + file.originalname);
