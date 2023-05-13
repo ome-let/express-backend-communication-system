@@ -131,3 +131,9 @@ dist
 
 # package lock
 package-lock.json
+
+# file in project
+/temp/*
+!/temp/.gitkeep
+/public/uploads/*
+!/public/uploads/.gitkeep

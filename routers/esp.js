@@ -39,11 +39,12 @@ router.post("/", async (req, res) => {
       productQuatity,
     });
 
-    const dateTime = new Date().toISOString();
+    const dateTime = new Date().valueOf();
+    const random = Math.floor(Math.random() * 1000);
 
     await firestore
       .collection("productHistory")
-      .doc(`${id}_${dateTime}_${status}`)
+      .doc(`${id}_${dateTime}_${status}_${random}`)
       .set({
         productId: id,
         status: status,
@@ -52,6 +53,7 @@ router.post("/", async (req, res) => {
 
     res.json({
       message: "Quatity update success",
+      product: productData.data()
     });
   } catch (error) {
     res.status(500).json({
