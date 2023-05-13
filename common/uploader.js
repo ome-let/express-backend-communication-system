@@ -3,10 +3,16 @@ const fs = require('fs');
 
 const uploadFile = async (ref ,file) => {
     try {
-        const fileRef = await fs.readFileSync(__dirname + "\\\\..\\\\" + file.path);
+        let filePath = ""
+        if(process.env.environment == "local") {
+            filePath = __dirname + "\\\\..\\\\" + file.path;
+        } else {
+            filePath = __dirname + "/" + file.path;
+        }
+        const fileRef = await fs.readFileSync(filePath);
         const storageRef = storage.ref(ref + "/" + file.originalname);
         await storageRef.put(fileRef.buffer);
-        fs.unlinkSync(__dirname + "\\\\..\\\\" + file.path);
+        fs.unlinkSync(filePath);
         return Promise.resolve(storageRef.getDownloadURL());
     } catch (error) {
         return Promise.reject(error);
