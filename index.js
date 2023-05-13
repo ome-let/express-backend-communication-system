@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Server is running :)");
+  res.send(`Server is running [enviroment: ${process.env.environment}]`);
 });
 
 const routers = fs.readdirSync("./routers");
