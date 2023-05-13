@@ -34,7 +34,6 @@ app.get("/", (req, res) => {
 const routers = fs.readdirSync("./routers");
 routers.forEach((router) => {
   try {
-    console.log(`🔨  Creating router /${router} ...`);
     const routerPath = `./routers/${router}`;
     const routerName = router.replace(".js", "");
     app.use(`/${routerName}`, require(routerPath).router);
