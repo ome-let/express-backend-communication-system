@@ -52,6 +52,7 @@ router.post("/", async (req, res) => {
 
     res.json({
       message: "Quatity update success",
+      product: productData.data()
     });
   } catch (error) {
     res.status(500).json({

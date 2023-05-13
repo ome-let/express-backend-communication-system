@@ -1,6 +1,7 @@
 const firebase = require('firebase/compat/app');
 require('dotenv').config();
 require ('firebase/compat/firestore');
+require ('firebase/compat/storage');
 
 const firebaseConfig = {
     apiKey: process.env.apiKey,
@@ -14,5 +15,6 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 module.exports = {
-    firestore: firebaseApp.firestore()
+    firestore: firebaseApp.firestore(),
+    storage: firebaseApp.storage()
 }
