@@ -51,13 +51,16 @@ router.post("/", async (req, res) => {
         dateTime: dateTime,
       });
 
+    const product = productData.data();
+    product.productQuatity = productQuatity;
+
     res.json({
       message: "Quatity update success",
-      product: productData.data()
+      product: product
     });
   } catch (error) {
     res.status(500).json({
-      message: error.message,
+      message: error.message
     });
   }
 });
