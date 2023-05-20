@@ -23,7 +23,8 @@ router.post("/", async (req, res) => {
 
     let prepareData = {
         productName,
-        productQuatity: 0
+        productQuatity: 0,
+        createdAt: new Date().valueOf(),
     }
 
     prepareData.productDescription = productDescription ? productDescription : "";
