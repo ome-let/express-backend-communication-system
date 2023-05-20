@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { firestore } = require("../common/firebase");
+const logger = require("../common/logger");
 
 router.post("/", async (req, res) => {
   try {
@@ -53,6 +54,8 @@ router.post("/", async (req, res) => {
 
     const product = productData.data();
     product.productQuatity = productQuatity;
+
+    logger.notify(`${status} product`, `Product ${product.productName}(${id}) is updated (Quantity: ${productQuatity})`);
 
     res.json({
       message: "Quatity update success",

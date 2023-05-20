@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { firestore } = require("../common/firebase");
+const logger = require("../common/logger");
 
 router.delete("/:rfidId", async (req, res) => {
   try {
@@ -11,9 +12,11 @@ router.delete("/:rfidId", async (req, res) => {
       res.status(404).json({
         message: "Not found",
       });
+      logger.notify("Delete product", `Product ${rfidId} not exist`);
       return;
     }
-    await firestore.collection("test").doc(rfidId).delete();
+    await firestore.collection("product").doc(rfidId).delete();
+    logger.notify("Delete product", `Product ${productData.data().productName}(${rfidId}) is deleted`);
     res.json({
       message: "Delete success",
     });
