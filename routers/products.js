@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 
     let products = await firestore
       .collection("product")
-      .orderBy("productName", "desc")
+      .orderBy("createdAt", "desc")
       .get();
     let data = [];
 
@@ -90,7 +90,7 @@ router.get("/search/:keyword", async (req, res) => {
 
     let products = await firestore
       .collection("product")
-      .orderBy("productName", "desc")
+      .orderBy("createdAt", "desc")
       .get();
     let data = [];
 
