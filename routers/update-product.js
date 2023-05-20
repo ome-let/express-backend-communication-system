@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { firestore } = require("../common/firebase");
+const logger = require("../common/logger");
 
 router.put("/:rfidId", async (req, res) => {
   try {
@@ -12,6 +13,7 @@ router.put("/:rfidId", async (req, res) => {
       res.status(400).json({
         message: `Product ${rfidId} not exist`,
       });
+      logger.notify("Update product", `Product ${rfidId} not exist`);
       return;
     }
 
@@ -31,6 +33,7 @@ router.put("/:rfidId", async (req, res) => {
 
     await firestore.collection("product").doc(rfidId).update(prepareData);
 
+    logger.notify("Update product", `Product ${productName}(${rfidId}) is updated`);
     res.json({
         message: "Update product success",
     });

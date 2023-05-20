@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { firestore } = require('../common/firebase');
+const logger = require("../common/logger");
 
 router.post("/", async (req, res) => {
   try {
@@ -18,6 +19,7 @@ router.post("/", async (req, res) => {
         res.status(400).json({
             message: `Product ${rfidId} already exist`,
         });
+        logger.notify("Insert product", `Product ${rfidId} already exist`)
         return;
     }
 
@@ -32,6 +34,7 @@ router.post("/", async (req, res) => {
 
     await firestore.collection("product").doc(rfidId).set(prepareData);
 
+    logger.notify("Insert product", `Product ${productName}(${rfidId}) is inserted`)
     res.json({
         message: "Insert product success",
     });

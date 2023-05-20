@@ -6,7 +6,7 @@ var cors = require("cors");
 const multer = require("multer");
 require("dotenv").config();
 
-const post = process.env.PORT || 4000;
+const post = process.env.port || 4000;
 
 // middleware
 app.use(bodyParser.json());
