@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
         res.status(400).json({
             message: `Product ${rfidId} already exist`,
         });
-        logger.notify("Insert product", `Product ${rfidId} already exist`)
+        logger.notify("❌ Update product", `Product with rfid ${rfidId} not exist`);
         return;
     }
 
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
 
     await firestore.collection("product").doc(rfidId).set(prepareData);
 
-    logger.notify("Insert product", `Product ${productName}(${rfidId}) is inserted`)
+    logger.notify("✅ Insert product", `Product \`${productName}\` with rfid \`${rfidId}\` is inserted`, 3066993)
     res.json({
         message: "Insert product success",
     });

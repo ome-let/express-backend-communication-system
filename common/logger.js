@@ -2,15 +2,17 @@ const axios = require("axios");
 require("dotenv").config();
 
 module.exports = {
-    notify: async (title, message) => {
+    notify: async (title, message, color=14177041) => {
     try {
       const discordWebHook = process.env.discordWebhookAPI;
+      const url = process.env.frontendURL;
       const data = {
         embeds: [
           {
             title: title,
             description: message,
-            color: 14177041,
+            color: color,
+            url: url
           },
         ],
       };

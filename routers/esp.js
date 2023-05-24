@@ -25,6 +25,7 @@ router.post("/", async (req, res) => {
       res.status(404).json({
         message: `Product ${id} not found`,
       });
+      logger.notify(`❌ Insert Product History (${status})`, `Product with rfid ${rfidId} not exist`);
       return;
     }
 
@@ -58,7 +59,7 @@ router.post("/", async (req, res) => {
     const product = productData.data();
     product.productQuatity = productQuatity;
 
-    logger.notify(`${status} product`, `Product ${product.productName}(${id}) is updated (Quantity: ${productQuatity})`);
+    logger.notify(`✅ Insert Product History (${status})`, `Product \`${product.productName}\` with rfid \`${id}\` is \`${status}\` (Total Quantity: \`${productQuatity}\`)`, 3066993);
 
     res.json({
       message: "Quatity update success",

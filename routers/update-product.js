@@ -13,7 +13,7 @@ router.put("/:rfidId", async (req, res) => {
       res.status(400).json({
         message: `Product ${rfidId} not exist`,
       });
-      logger.notify("Update product", `Product ${rfidId} not exist`);
+      logger.notify("❌ Update product", `Product with rfid ${rfidId} not exist`);
       return;
     }
 
@@ -33,7 +33,7 @@ router.put("/:rfidId", async (req, res) => {
 
     await firestore.collection("product").doc(rfidId).update(prepareData);
 
-    logger.notify("Update product", `Product ${productName}(${rfidId}) is updated`);
+    logger.notify("✅ Update product", `Product \`${productName}\` with rfid \`${rfidId}\` is updated`, 3066993);
     res.json({
         message: "Update product success",
     });
