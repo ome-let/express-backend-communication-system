@@ -50,6 +50,9 @@ router.post("/", async (req, res) => {
         productId: id,
         status: status,
         dateTime: dateTime,
+        productName: productData.data().productName,
+        productImage: productData.data().productImage,
+        productDescription: productData.data().productDescription
       });
 
     const product = productData.data();

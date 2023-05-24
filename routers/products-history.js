@@ -33,12 +33,9 @@ router.get("/", async (req, res) => {
 
     for (let i = 0; i < productHistoryList.docs.length; i++) {
       const productHistory = productHistoryList.docs[i];
-      let product = await getProductById(productHistory.data().productId, productCache);
-      productCache.push(product);
       data.push({
         id: productHistory.id,
         ...productHistory.data(),
-        product: product
       });
     }
 
