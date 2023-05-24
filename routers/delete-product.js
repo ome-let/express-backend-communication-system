@@ -12,11 +12,11 @@ router.delete("/:rfidId", async (req, res) => {
       res.status(404).json({
         message: "Not found",
       });
-      logger.notify("Delete product", `Product ${rfidId} not exist`);
+      logger.notify("❌ Delete product", `Product \`${rfidId}\` not exist`);
       return;
     }
     await firestore.collection("product").doc(rfidId).delete();
-    logger.notify("Delete product", `Product ${productData.data().productName}(${rfidId}) is deleted`);
+    logger.notify("🗑️ Delete product", `Product \`${productData.data().productName}\` with rfid \`${rfidId}\` is deleted`);
     res.json({
       message: "Delete success",
     });
