@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 
     const productData = await firestore.collection("product").doc(id).get();
     if (!productData.data()) {
-      logger.notify(`❌ [ESP] Insert Product History (${status})`, `Product with rfid ${rfidId} not exist`);
+      logger.notify(`❌ [ESP] Insert Product History (${status})`, `Product with rfid ${id} not exist`);
       res.status(404).json({
         message: `Product ${id} not found`,
       });
