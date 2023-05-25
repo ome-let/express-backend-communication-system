@@ -7,6 +7,7 @@ router.post("/", async (req, res) => {
   try {
     const { id, status } = req.body;
     if (!id || !status) {
+      logger.notify(`❌ [ESP] Insert Product History (${status})`, `Request body is not correct`, 15158332);
       res.status(400).json({
         message: "Request body is not correct",
       });
@@ -14,6 +15,7 @@ router.post("/", async (req, res) => {
     }
 
     if (status != "IN_STOCK" && status != "OUT_STOCK") {
+      logger.notify(`❌ [ESP] Insert Product History (${status})`, `Status is not correct`, 15158332);
       res.status(400).json({
         message: "Status is not correct",
       });
@@ -22,10 +24,10 @@ router.post("/", async (req, res) => {
 
     const productData = await firestore.collection("product").doc(id).get();
     if (!productData.data()) {
+      logger.notify(`❌ [ESP] Insert Product History (${status})`, `Product with rfid ${rfidId} not exist`);
       res.status(404).json({
         message: `Product ${id} not found`,
       });
-      logger.notify(`❌ Insert Product History (${status})`, `Product with rfid ${rfidId} not exist`);
       return;
     }
 
